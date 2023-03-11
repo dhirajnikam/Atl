@@ -313,7 +313,10 @@ class _ATLRenderState extends State<ATLRender> {
   @override
   Widget build(BuildContext context) {
     // Fetching the Widget's LaTeX code as well as it's [TextStyle]
-    final String? laTeXCode = widget.laTeXCode.data;
+    final String laTeXCode = widget.laTeXCode.data!
+        .replaceAll("\\(", "\$")
+        .replaceAll("\\)", "\$")
+        .replaceAll("<br>", "\n");
     TextStyle? defaultTextStyle = widget.laTeXCode.style;
 
     // Building [RegExp] to find any Math part of the LaTeX code by looking for the specified delimiters
@@ -324,7 +327,7 @@ class _ATLRenderState extends State<ATLRender> {
     final String rawRegExp =
         '(($delimiter)([^$delimiter]*[^\\\\\\$delimiter])($delimiter)|($displayDelimiter)([^$displayDelimiter]*[^\\\\\\$displayDelimiter])($displayDelimiter))';
     List<RegExpMatch> matches =
-        RegExp(rawRegExp, dotAll: true).allMatches(laTeXCode!).toList();
+        RegExp(rawRegExp, dotAll: true).allMatches(laTeXCode).toList();
 
     // If no single Math part found, returning the raw [Text] from widget.laTeXCode
     if (matches.isEmpty) return widget.laTeXCode;
