@@ -285,8 +285,8 @@ class _TexImageState extends State<TexImage>
   bool get wantKeepAlive => widget.keepAlive;
 }
 
-class AtomicKatex extends StatefulWidget {
-  const AtomicKatex({
+class ATLRender extends StatefulWidget {
+  const ATLRender({
     Key? key,
     required this.laTeXCode,
     this.textStyle,
@@ -305,10 +305,10 @@ class AtomicKatex extends StatefulWidget {
   final String displayDelimiter;
 
   @override
-  State<AtomicKatex> createState() => _AtomicKatexState();
+  State<ATLRender> createState() => _ATLRenderState();
 }
 
-class _AtomicKatexState extends State<AtomicKatex> {
+class _ATLRenderState extends State<ATLRender> {
   @override
   @override
   Widget build(BuildContext context) {
